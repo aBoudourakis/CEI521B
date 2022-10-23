@@ -44,40 +44,10 @@ def getWeather():
                            tableData[lineIndex][4],
                            tableData[lineIndex][3],
                            tableData[lineIndex][2]])
-        print('dfColumns', dfColumns)
-        print('dfRows', dfRows)
+        # print('dfColumns', dfColumns)
+        # print('dfRows', dfRows)
         return pd.DataFrame(data=dfRows, columns=dfColumns)
-        # print(dfresult)
-        # pandasDF = pd.DataFrame({
-        #
-        # })
-        # print('array', array)
-        # print('len(array[0])', len(array[0]))
-        #             tableArray = []
-        #             for row in array:
-        #                 # print('row', row.split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
-        #                 splitRow = row.split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)')
-        #                 print('splitRow[0]', splitRow[0])
-        #                 tableArray.append(splitRow)
-        # print('row', re.split(r'"[^"]*"(*SKIP)(*FAIL)|,\s*', row))
-        # print('row', rx.split(row))
-        # print('tableArray', tableArray[1])
-        # arrayedRow = str(tableArray[1]).split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)')
-        # print('arrayedRow', arrayedRow)
-        # print('tableArray split row?', str(tableArray[1]).split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
-        # print('tableArray split?', tableArray[1].split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
-        # print('tableArray[1] type?', type(tableArray[1]))  # list
-        # print('tableArray[1] length?', len(tableArray[1]))  # 1
-        # def load_data():
-        #     return pd.DataFrame(
-        #         {
-        #             tableData[0][0]: [tableData[1][1]],
-        #             "second column": [10, 20, 30, 40],
-        #         }
-        #     )
-        # # Boolean to resize the dataframe, stored as a session state variable
-        # st.checkbox("Use container width", value=False, key="use_container_width")
-        # df = load_data()
+
         # # Display the dataframe and allow the user to stretch the dataframe
         # # across the full width of the container, based on the checkbox value
         # st.dataframe(df, use_container_width=st.session_state.use_container_width)

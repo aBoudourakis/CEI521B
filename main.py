@@ -1,13 +1,15 @@
 import streamlit as st
 
 import sys
-import os
+# import os
 
 sys.path.append('./Services')
 
 from Services.weather import getWeather
 
-getWeather()
+weatherData = getWeather()
+# print('weatherData', weatherData)
+st.dataframe(weatherData, use_container_width=st.session_state.use_container_width)
 # TODO refactor to return data and use them in a table
 # st.checkbox("Use container width", value=False, key="use_container_width")
 # df = load_data()
