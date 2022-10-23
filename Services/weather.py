@@ -32,6 +32,13 @@ try:
         tableData.append(line)
         # print('line', line)
     print('tableData', tableData)
+
+    dfColumns = [tableData[0][0], 'Time', tableData[0][4]]
+    print('dfColumns', dfColumns)
+
+    # pandasDF = pd.DataFrame({
+    #
+    # })
     # print('array', array)
     # print('len(array[0])', len(array[0]))
     #             tableArray = []
@@ -40,8 +47,8 @@ try:
     #                 splitRow = row.split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)')
     #                 print('splitRow[0]', splitRow[0])
     #                 tableArray.append(splitRow)
-        # print('row', re.split(r'"[^"]*"(*SKIP)(*FAIL)|,\s*', row))
-        # print('row', rx.split(row))
+    # print('row', re.split(r'"[^"]*"(*SKIP)(*FAIL)|,\s*', row))
+    # print('row', rx.split(row))
     # print('tableArray', tableArray[1])
     # arrayedRow = str(tableArray[1]).split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)')
     # print('arrayedRow', arrayedRow)
@@ -52,7 +59,7 @@ try:
     # def load_data():
     #     return pd.DataFrame(
     #         {
-    #             "first column": [1, 2, 3, 4],
+    #             tableData[0][0]: [tableData[1][1]],
     #             "second column": [10, 20, 30, 40],
     #         }
     #     )
