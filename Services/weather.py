@@ -40,7 +40,6 @@ try:
         defRows.append([tableData[lineIndex][0], tableData[lineIndex][1], tableData[lineIndex][4]])
     print('dfColumns', dfColumns)
     print('defRows', defRows)
-
     # pandasDF = pd.DataFrame({
     #
     # })
