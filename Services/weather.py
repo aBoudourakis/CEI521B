@@ -31,10 +31,15 @@ try:
     for line in reader(array):
         tableData.append(line)
         # print('line', line)
-    print('tableData', tableData)
+    # print('tableData', tableData)
 
-    dfColumns = [tableData[0][0], 'Time', tableData[0][4]]
+    # dfColumns = [tableData[0][0], 'Time', tableData[0][4]]
+    dfColumns = ['Περιοχή', 'Ώρα', 'Θερμοκρασία']
+    defRows = []
+    for lineIndex in range(1, len(tableData)):
+        defRows.append([tableData[lineIndex][0], tableData[lineIndex][1], tableData[lineIndex][4]])
     print('dfColumns', dfColumns)
+    print('defRows', defRows)
 
     # pandasDF = pd.DataFrame({
     #
