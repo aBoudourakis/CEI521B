@@ -8,6 +8,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
+
 def getWeather():
     try:
         ResultBytes = request.urlopen(
@@ -35,12 +36,18 @@ def getWeather():
         # print('tableData', tableData)
 
         # dfColumns = [tableData[0][0], 'Time', tableData[0][4]]
-        dfColumns = ['Περιοχή', 'Ώρα', 'Θερμοκρασία']
-        defRows = []
+        dfColumns = ['Περιοχή', 'Ημερομηνία', 'Θερμοκρασία', 'Μικρότερη', 'Μεγαλύτερη']
+        dfRows = []
         for lineIndex in range(1, len(tableData)):
-            defRows.append([tableData[lineIndex][0], tableData[lineIndex][1], tableData[lineIndex][4]])
+            dfRows.append([tableData[lineIndex][0],
+                           tableData[lineIndex][1],
+                           tableData[lineIndex][4],
+                           tableData[lineIndex][3],
+                           tableData[lineIndex][2]])
         print('dfColumns', dfColumns)
-        print('defRows', defRows)
+        print('dfRows', dfRows)
+        return pd.DataFrame(data=dfRows, columns=dfColumns)
+        # print(dfresult)
         # pandasDF = pd.DataFrame({
         #
         # })
@@ -83,3 +90,7 @@ def getWeather():
         ErrorInfo = e.read().decode()
         print('Error code: ', e.code, ErrorInfo)
         sys.exit()
+
+
+dfResult = getWeather()
+print(dfResult)
