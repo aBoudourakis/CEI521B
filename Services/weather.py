@@ -1,5 +1,6 @@
 import csv
 import re
+from csv import reader
 import sys
 from urllib import request
 from urllib import error
@@ -26,13 +27,28 @@ try:
     #
     # print('results', results)
     array = ResultBytes.splitlines()
-    print('array', array)
+    tableData = []
+    for line in reader(array):
+        tableData.append(line)
+        # print('line', line)
+    print('tableData', tableData)
+    # print('array', array)
     # print('len(array[0])', len(array[0]))
-    # tableArray = []
-    for row in array:
-        # print('row', row.split('(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
-        print('row', re.split(r'".+?"|[\w-]+', row))
-
+    #             tableArray = []
+    #             for row in array:
+    #                 # print('row', row.split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
+    #                 splitRow = row.split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)')
+    #                 print('splitRow[0]', splitRow[0])
+    #                 tableArray.append(splitRow)
+        # print('row', re.split(r'"[^"]*"(*SKIP)(*FAIL)|,\s*', row))
+        # print('row', rx.split(row))
+    # print('tableArray', tableArray[1])
+    # arrayedRow = str(tableArray[1]).split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)')
+    # print('arrayedRow', arrayedRow)
+    # print('tableArray split row?', str(tableArray[1]).split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
+    # print('tableArray split?', tableArray[1].split(r'(?:^"?|, ?"?)\K(?:(?<=").+?(?=")|[\w-]+)'))
+    # print('tableArray[1] type?', type(tableArray[1]))  # list
+    # print('tableArray[1] length?', len(tableArray[1]))  # 1
     # def load_data():
     #     return pd.DataFrame(
     #         {
