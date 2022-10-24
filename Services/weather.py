@@ -36,5 +36,5 @@ def get_weather():
         sys.exit()
 
 
-dfResult = getWeather()
+dfResult = get_weather()
 print(dfResult)
