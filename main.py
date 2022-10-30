@@ -2,15 +2,9 @@ from Services.weather import get_weather
 
 import streamlit as st
 
-import sys
-
-# import os
-
 st.set_page_config(page_title='Gift of Athena', page_icon='🎃', layout="wide", initial_sidebar_state="auto")
-# sys.path.append('./Services')
 
 weatherData = get_weather()
-# st.dataframe(weatherData)
 
 col1, col2, col3 = st.columns(3)
 
