@@ -10,9 +10,15 @@ def get_pollution():
         limassolGeo = {"lat": '33.0413', "lon": '33.0413'}
         # X-RapidAPI-Key = '082903c5a0msh3be58c7cee21399p1fa84ejsn1d942a71efcc'
         # X-RapidAPI-Host = 'air-quality.p.rapidapi.com'
-
+        #
+        # result_bytes = request.urlopen(
+        #     "http://api.airvisual.com/v2/nearest_city?key=cb5750e6-34fb-4cf3-b605-a497c44112ce").read(
+        #
+        # ).decode(
+        #     'UTF-8')
+        # TODO: check bookmarks to add headers to api call
         result_bytes = request.urlopen(
-            "http://api.airvisual.com/v2/nearest_city?key=cb5750e6-34fb-4cf3-b605-a497c44112ce").read(
+            " https://api.ambeedata.com/latest/by-lat-lng?lat=33.0413&lng=33.0413").read(
 
         ).decode(
             'UTF-8')
