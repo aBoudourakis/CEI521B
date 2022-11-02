@@ -36,6 +36,7 @@ def get_crypto():
         # expandedTestAll = pd.DataFrame(pd.Series(testAll).explode().tolist()).drop('id', 1)
         print('expandedTestAll')
         print(expanded_test_all)
+        # TODO: chery pick columns
         # print(expanded_test_all)
         # next line works and extracts id value
         # TODO look further into constructing desired table like weather service
@@ -48,7 +49,36 @@ def get_crypto():
         print(item_test[0]["priceChange1h"])
         print(item_test[0]["priceChange1d"])
         print(item_test[0]["priceChange1w"])
-        print(pd_df.iloc[1])
+        # print('pd_df.iloc[1]')
+        # print(pd_df.iloc[1])
+
+
+        # table_rows = []
+        # for rowIndex in item_test:
+        #     table_rows.append([
+        #         item_test[rowIndex]["name"],
+        #         item_test[rowIndex]["symbol"],
+        #         item_test[rowIndex]["icon"],
+        #         item_test[rowIndex]["price"],
+        #         item_test[rowIndex]["priceChange1h"],
+        #         item_test[rowIndex]["priceChange1d"],
+        #         item_test[rowIndex]["priceChange1w"],
+        #     ])
+        # print('============TABLE ROWS==============')
+        # print(table_rows)
+
+        # tableHeader = pd_df.iloc[0]['coins']
+        # print('========TABLE HEADER======')
+        # print(tableHeader)
+
+        # table_rows = []
+        # for lineIndex in range(1, len(pd_df)):
+        #     table_rows.append([
+        #         pd_df.iloc[lineIndex]['coins']
+        #     ])
+        # print('============TABLE ROWS==============')
+        # print(table_rows)
+
 
         # array = coins_array.splitlines()
         array = pd_df
