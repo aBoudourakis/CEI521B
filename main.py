@@ -1,5 +1,6 @@
 from Services.weather import get_weather
 from Services.crypto import get_crypto
+from Services.crypto_html import get_crypto_html
 
 import streamlit as st
 
@@ -7,6 +8,7 @@ st.set_page_config(page_title='Gift of Athena', page_icon='🎃', layout="wide",
 
 weatherData = get_weather()
 crypto_data = get_crypto()
+crypto_html = get_crypto_html()
 
 col1, col2, col3 = st.columns(3)
 
@@ -21,8 +23,8 @@ with st.container():
         st.dataframe(crypto_data)
 
     with col3:
-        st.header("An owl")
-        st.image("https://static.streamlit.io/examples/owl.jpg")
+        st.header("Crypto HTML")
+        st.components.v1.html(crypto_html, width=420, height=None, scrolling=True)
 with st.container():
     with col1:
         st.header("Weather in Limassol")
