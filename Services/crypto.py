@@ -12,96 +12,55 @@ def get_crypto():
             "https://api.coinstats.app/public/v1/coins?skip=0&limit=5&currency=EUR").read().decode('UTF-8')
         # print('result_bytes', result_bytes)
         array = result_bytes.splitlines()
-        print(array)
+        print('array', array)
+        print('array[0]', array[0])
+        dictionary = json.loads(array[0])
+        print('dictionary', dictionary['coins'])
+        print('type dictionary', type(dictionary['coins']))
+
         coins_array = json.loads(array[0])
-        print(coins_array)
-        print(type(coins_array))
         pd_df = pd.DataFrame.from_dict(coins_array)
-        print(type(pd_df))
-        print('pd_df')
-        print(pd_df)
-        print('=================')
-        print(pd_df.iloc[0])
-        print('type(testPdDf.iloc[0])')
-        print(type(pd_df.iloc[0]))
-        item_test = pd_df.iloc[0]
-        print("item_test['argss]")
-        # below extraction from df series works --> look into iterating/mapping all series
-        print(item_test['coins']['name'])
-        test_all = pd_df['coins']
-        print('test_all')
-        print(test_all)
-        print(type(test_all))
-        expanded_test_all = (test_all.explode().tolist())
-        # expandedTestAll = pd.DataFrame(pd.Series(testAll).explode().tolist()).drop('id', 1)
-        print('expandedTestAll')
-        print(expanded_test_all)
-        # TODO: chery pick columns
-        # print(expanded_test_all)
-        # next line works and extracts id value
-        # TODO look further into constructing desired table like weather service
-        print('extract data from index of row 1')
-        print(item_test[0]["id"])
-        print(item_test[0]["name"])
-        print(item_test[0]["symbol"])
-        print(item_test[0]["icon"])
-        print(item_test[0]["price"])
-        print(item_test[0]["priceChange1h"])
-        print(item_test[0]["priceChange1d"])
-        print(item_test[0]["priceChange1w"])
-        # print('pd_df.iloc[1]')
-        # print(pd_df.iloc[1])
+        coins_from_pd_df = pd_df['coins']
+        expanded_coins = (coins_from_pd_df.explode().tolist())
+        print('expanded_coins', expanded_coins)
 
+        data_frame = pd.DataFrame.from_dict(dictionary)
+        print('data_frame type', type(data_frame))
+        print('data_frame', data_frame)
 
-        # table_rows = []
-        # for rowIndex in item_test:
-        #     table_rows.append([
-        #         item_test[rowIndex]["name"],
-        #         item_test[rowIndex]["symbol"],
-        #         item_test[rowIndex]["icon"],
-        #         item_test[rowIndex]["price"],
-        #         item_test[rowIndex]["priceChange1h"],
-        #         item_test[rowIndex]["priceChange1d"],
-        #         item_test[rowIndex]["priceChange1w"],
-        #     ])
-        # print('============TABLE ROWS==============')
-        # print(table_rows)
+        print('test locate row', data_frame.loc[0])
+        print('test locate row type', type(data_frame.loc[0]))
 
-        # tableHeader = pd_df.iloc[0]['coins']
-        # print('========TABLE HEADER======')
-        # print(tableHeader)
+        df_from_df = pd.DataFrame.from_records(coins_array)
+        print('df_from_df', df_from_df)
 
-        # table_rows = []
-        # for lineIndex in range(1, len(pd_df)):
-        #     table_rows.append([
-        #         pd_df.iloc[lineIndex]['coins']
-        #     ])
-        # print('============TABLE ROWS==============')
-        # print(table_rows)
+        # merged_dataframe = pd.DataFrame(data=dictionary, columns=expanded_coins)
+        # print('merged_dataframe', merged_dataframe)
 
+        print('=====================')
 
-        # array = coins_array.splitlines()
-        array = pd_df
+        data_rows = []
 
-        table_data = []
-        for line in reader(coins_array):
-            table_data.append(line)
+        for ind in data_frame.index:
+            data_rows.append(data_frame.loc[ind]['coins'])
+            # print(data_frame.loc[ind]['coins'])
 
-        # construct data frame
-        df_columns = ['Όνομα', 'Σύμβολο', 'Λογότυπο', 'Τιμή ($)', 'Αυξομείωση 1 ώρα', 'Αυξομείωση 1 ημέρα',
-                      'Αυξομείωση 1 εβδομάδα']
-        df_rows = []
-        for lineIndex in range(1, len(table_data)):
-            df_rows.append([
-                item_test[lineIndex]["name"],
-                item_test[lineIndex]["symbol"],
-                item_test[lineIndex]["icon"],
-                item_test[lineIndex]["price"],
-                item_test[lineIndex]["priceChange1h"],
-                item_test[lineIndex]["priceChange1d"],
-                item_test[lineIndex]["priceChange1w"],
-            ])
-        return pd.DataFrame(data=df_rows, columns=df_columns)
+        print('data_rows', data_rows)
+
+        custom_columns = ['name', 'price']
+
+        variables = data_rows[0].keys()
+        print('variables', variables)
+        df_test = pd.DataFrame(data=data_rows, columns=custom_columns)
+
+        # renaming the DataFrame columns
+        df_test.rename(columns={'name': 'Όνομα',
+                                'price': 'Τιμή ($)'},
+                       inplace=True)
+
+        print('df_test', df_test)
+
+        return df_test
 
     except error.HTTPError as e:
         error_info = e.read().decode()
