@@ -1,4 +1,5 @@
 from csv import reader
+import json
 import sys
 from urllib import request
 from urllib import error
@@ -18,11 +19,27 @@ def get_pollution():
         #     'UTF-8')
         # TODO: check bookmarks to add headers to api call
         result_bytes = request.urlopen(
-            " https://api.ambeedata.com/latest/by-lat-lng?lat=33.0413&lng=33.0413").read(
+            "https://api.waqi.info/feed/here/?token=6991a7e7db2339c3304b0bbf7e057effbb1e98f8").read(
 
         ).decode(
             'UTF-8')
         print('result_bytes', result_bytes)
+        dictionary = json.loads(result_bytes)
+        print('dictionary', dictionary)
+        print('data', dictionary['data'])
+        print('data target', dictionary['data']['iaqi'])
+
+        cityData = dictionary['data']['city']
+        pollution = dictionary['data']['iaqi']
+
+        valuesArray = []
+
+        for key in pollution:
+            valuesArray.append({key: pollution[key]['v']})
+
+        print('array values', valuesArray)
+        # TODO: convert above to data frame (series of tuples/key-value pairs array?
+
         return []
 
     except error.HTTPError as e:
