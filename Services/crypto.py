@@ -47,7 +47,7 @@ def get_crypto():
 
         # print('data_rows', data_rows)
 
-        custom_columns = ['name', 'symbol', 'icon', 'price', 'priceChange1h', 'priceChange1d', 'priceChange1w']
+        custom_columns = ['name', 'symbol', 'price', 'priceChange1h', 'priceChange1d', 'priceChange1w']
 
         # variables = data_rows[0].keys()
         # print('variables', variables)
@@ -57,8 +57,7 @@ def get_crypto():
         refined_data_frame.rename(columns={
             'name': 'Όνομα',
             'symbol': 'Σύμβολο',
-            'icon': 'Λογότυπο',
-            'price': 'Τιμή ($)',
+            'price': 'Αξία ($)',
             'priceChange1h': 'Αυξομείωση 1 ώρα',
             'priceChange1d': 'Αυξομείωση 1 ημέρα',
             'priceChange1w': 'Αυξομείωση 1 εβδομάδα',

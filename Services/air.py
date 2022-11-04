@@ -8,39 +8,44 @@ import pandas as pd
 
 def get_pollution():
     try:
-        limassolGeo = {"lat": '33.0413', "lon": '33.0413'}
-        # X-RapidAPI-Key = '082903c5a0msh3be58c7cee21399p1fa84ejsn1d942a71efcc'
-        # X-RapidAPI-Host = 'air-quality.p.rapidapi.com'
-        #
-        # result_bytes = request.urlopen(
-        #     "http://api.airvisual.com/v2/nearest_city?key=cb5750e6-34fb-4cf3-b605-a497c44112ce").read(
-        #
-        # ).decode(
-        #     'UTF-8')
-        # TODO: check bookmarks to add headers to api call
         result_bytes = request.urlopen(
             "https://api.waqi.info/feed/here/?token=6991a7e7db2339c3304b0bbf7e057effbb1e98f8").read(
 
         ).decode(
             'UTF-8')
-        print('result_bytes', result_bytes)
+        # print('result_bytes', result_bytes)
         dictionary = json.loads(result_bytes)
-        print('dictionary', dictionary)
-        print('data', dictionary['data'])
-        print('data target', dictionary['data']['iaqi'])
+        # print('dictionary', dictionary)
+        # print('data', dictionary['data'])
+        # print('data target', dictionary['data']['iaqi'])
 
         cityData = dictionary['data']['city']
+        # print('cityData', cityData)
+        print('cityData', cityData['name'])
+        greek_city_info = cityData['name'].split(',')[1]
+        city_info = greek_city_info.split('  ')[0]
+        print('greek_city_info', greek_city_info)
+        print('city_info', city_info)
         pollution = dictionary['data']['iaqi']
 
         valuesArray = []
 
-        for key in pollution:
-            valuesArray.append({key: pollution[key]['v']})
+        table_columns = ['Ρύπος', 'Τιμή']
+        table_rows = []
 
-        print('array values', valuesArray)
+        for key in pollution:
+            # table_columns.append(key)
+            table_rows.append([key, pollution[key]['v']])
+            valuesArray.append({key: pollution[key]['v']})
+        # for index in range(1, len(valuesArray)):
+        #     table_rows.append([index, valuesArray[index]])
+
+        # print('array values', valuesArray)
+        # print('table_columns', table_columns)
+        # print('table_rows', table_rows)
         # TODO: convert above to data frame (series of tuples/key-value pairs array?
 
-        return []
+        return [city_info, pd.DataFrame(data=table_rows, columns=table_columns)]
 
     except error.HTTPError as e:
         error_info = e.read().decode()
