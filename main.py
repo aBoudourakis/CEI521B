@@ -2,6 +2,7 @@ from Services.weather import get_weather
 from Services.crypto import get_crypto
 from Services.air import get_pollution
 from Functions.weathercity import get_weather_by_input
+from Functions.bmicalculator import get_bmi
 
 import streamlit as st
 
@@ -11,11 +12,12 @@ weather_data = get_weather()
 crypto_data = get_crypto()
 pollution_data = get_pollution()
 
+# image_data = get_image_by_keyword('mouse')
+
 # weather_by_city_data = get_weather_by_input(option)
 
 # Weather city selection
 selected_city = 'Berlin'
-
 
 if "visibility" not in st.session_state:
     st.session_state.visibility = "visible"
@@ -48,13 +50,24 @@ with st.container():
             label_visibility=st.session_state.visibility,
             disabled=st.session_state.disabled,
         )
-        # weather_by_city_data = get_weather_by_input(option)
+        weather_by_city_data = get_weather_by_input(option)
         st.subheader(option)
-        # st.dataframe(weather_by_city_data)
+        st.dataframe(weather_by_city_data)
     with col2:
-        st.header("A dog")
-        st.image("https://static.streamlit.io/examples/dog.jpg")
-
+        st.header("Υπολογισμός Δείκτη Μάζας Σώματος (BMI)")
+        height = st.text_input(
+            "εισάξατε ύψος ",
+            label_visibility=st.session_state.visibility,
+            disabled=st.session_state.disabled,
+        )
+        weight = st.text_input(
+            "εισάξατε βάρος  ",
+            label_visibility=st.session_state.visibility,
+            disabled=st.session_state.disabled,
+        )
+        if st.button('Υπολογισμός'):
+            bmi_result = get_bmi(height, weight)
+            st.subheader(bmi_result or '')
     with col3:
         st.header("An owl")
         st.image("https://static.streamlit.io/examples/owl.jpg")
