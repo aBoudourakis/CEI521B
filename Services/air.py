@@ -21,11 +21,11 @@ def get_pollution():
 
         cityData = dictionary['data']['city']
         # print('cityData', cityData)
-        print('cityData', cityData['name'])
+        # print('cityData', cityData['name'])
         greek_city_info = cityData['name'].split(',')[1]
         city_info = greek_city_info.split('  ')[0]
-        print('greek_city_info', greek_city_info)
-        print('city_info', city_info)
+        # print('greek_city_info', greek_city_info)
+        # print('city_info', city_info)
         pollution = dictionary['data']['iaqi']
 
         valuesArray = []
@@ -58,4 +58,4 @@ def get_pollution():
 
 
 dfResult = get_pollution()
-print(dfResult)
+# print(dfResult)

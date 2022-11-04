@@ -79,4 +79,4 @@ def get_crypto():
 
 
 dfResult = get_crypto()
-print(dfResult)
+# print(dfResult)

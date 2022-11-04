@@ -16,15 +16,17 @@ def get_weather():
         for line in reader(array):
             table_data.append(line)
 
-        df_columns = ['Περιοχή', 'Ημερομηνία', 'Θερμοκρασία', 'Μικρότερη', 'Μεγαλύτερη']
+        df_columns = ['Περιοχή', 'Ημερομηνία', 'Θερμοκρασία (°C)', 'Μικρότερη (°C)', 'Μεγαλύτερη (°C)']
         df_rows = []
         for lineIndex in range(1, len(table_data)):
+            originalDate = table_data[lineIndex][1].split('-')
+            refinedDate = '/'.join(originalDate)
             df_rows.append([table_data[lineIndex][0],
-                           table_data[lineIndex][1],
-                           table_data[lineIndex][4],
+                           refinedDate,
+                           table_data[lineIndex][4] + ' °C',
                            table_data[lineIndex][3],
                            table_data[lineIndex][2]])
-        return pd.DataFrame(data=df_rows, columns=df_columns)
+        return pd.DataFrame(data=df_rows, columns=df_columns).style.hide_index()
 
     except error.HTTPError as e:
         error_info = e.read().decode()
@@ -37,4 +39,4 @@ def get_weather():
 
 
 dfResult = get_weather()
-print(dfResult)
+# print(dfResult)
