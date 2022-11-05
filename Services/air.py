@@ -1,4 +1,3 @@
-from csv import reader
 import json
 import sys
 from urllib import request
@@ -43,8 +42,6 @@ def get_pollution():
         # print('array values', valuesArray)
         # print('table_columns', table_columns)
         # print('table_rows', table_rows)
-        # TODO: convert above to data frame (series of tuples/key-value pairs array?
-
         return [city_info, pd.DataFrame(data=table_rows, columns=table_columns)]
 
     except error.HTTPError as e:

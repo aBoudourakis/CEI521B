@@ -37,7 +37,7 @@ with st.container():
         st.dataframe(weather_data)
 
     with col2:
-        st.header("Ψηφιακά Νομίσματα")
+        st.header("Kρυπτονομίσματα")
         st.caption('Αξία και διακύμανση ψηφιακών νομισμάτων')
         st.dataframe(crypto_data)
 
