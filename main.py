@@ -27,6 +27,11 @@ col1, col2, col3 = st.columns(3)
 
 with st.container():
     with col1:
+        st.header("Αθηνόδωρος Μπουδουράκης")
+        st.caption('Προχωρημένα Θέματα Τεχνολογίας Λογισμικού (CEI 521)')
+
+with st.container():
+    with col1:
         st.header("Τοπική θερμοκρασία")
         st.caption('Πρόγνωση για τις επόμενες 10 ημέρες')
         st.dataframe(weather_data)

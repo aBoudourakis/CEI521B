@@ -1,2 +1,14 @@
 run ./.conda/envs/CEI521A1/main.py
 
+const axios = require('axios');
+
+module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+    const targetLocation = req.query.city || 'Limassol';
+    const weatherDataResponse = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${targetLocation}?unitGroup=metric&key=ACRB86QG8FL6QRU43EGJ26W8V&contentType=csv`);
+    // console.log('weatherDataResponse', weatherDataResponse.data);
+    context.res = {
+        // status: 200, /* Defaults to 200 */
+        body: weatherDataResponse
+    };
+}
