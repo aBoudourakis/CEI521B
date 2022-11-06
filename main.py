@@ -6,7 +6,6 @@ from Functions.bmicalculator import get_bmi
 from Functions.recursive import get_factorial
 
 import json
-import markdown
 import streamlit as st
 
 st.set_page_config(page_title='Gift of Athena', page_icon='🎃', layout="wide", initial_sidebar_state="auto")
