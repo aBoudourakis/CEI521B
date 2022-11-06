@@ -1,2 +1,103 @@
 run ./.conda/envs/CEI521A1/main.py
 
+const axios = require('axios');
+
+module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+    const targetLocation = req.query.city || 'Limassol';
+    const weatherDataResponse = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${targetLocation}?unitGroup=metric&key=ACRB86QG8FL6QRU43EGJ26W8V&contentType=csv`);
+    // console.log('weatherDataResponse', weatherDataResponse.data);
+    context.res = {
+        // status: 200, /* Defaults to 200 */
+        body: weatherDataResponse
+    };
+}
+
+
+====== default google functions py =======
+
+def xesreader(request):
+    '''Responds to any HTTP request.
+    Args:
+        request (flask.Request): HTTP request object.
+    Returns:
+        The response text or any set of values that can be turned into a
+        Response object using
+        `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
+    '''
+    request_json = request.get_json()
+    if request.args and 'message' in request.args:
+        return request.args.get('message')
+    elif request_json and 'message' in request_json:
+        return request_json['message']
+    else:
+        return f'XES reader test!'
+
+
+====== XES SAMPLE stringified =======
+
+{"data":"<?xml version='1.0' encoding='utf-8' ?>\n<log xes.version='1849-2016' xes.features='nested-attributes' xmlns='http://www.xes-standard.org/'>\n\t<extension name='Organizational' prefix='org' uri='http://www.xes-standard.org/org.xesext' />\n\t<extension name='Time' prefix='time' uri='http://www.xes-standard.org/time.xesext' />\n\t<extension name='Concept' prefix='concept' uri='http://www.xes-standard.org/concept.xesext' />\n\t<string key='origin' value='csv' />\n\t<trace>\n\t\t<string key='concept:name' value='patient 0' />\n\t\t<event>\n\t\t\t<string key='concept:name' value=' First consult' />\n\t\t\t<string key='org:resource' value=' Dr. Anna' />\n\t\t\t<date key='time:timestamp' value='2017-01-02T11:40:11' />\n\t\t</event>\n\t\t<event>\n\t\t\t<string key='concept:name' value=' Blood test' />\n\t\t\t<string key='org:resource' value=' Lab' />\n\t\t\t<date key='time:timestamp' value='2017-01-02T12:47:33' />\n\t\t</event>\n\t\t<event>\n\t\t\t<string key='concept:name' value=' Physical test' />\n\t\t\t<string key='org:resource' value=' Nurse Jesse' />\n\t\t\t<date key='time:timestamp' value='2017-01-02T12:53:50' />\n\t\t</event>\n    </trace>\n</log>"}
+
+===== recursive backup =====
+
+recur_count = 0
+
+
+def calculate_factorial(n):
+    global recur_count
+    recur_count += 1
+    if n == 1:
+        return n
+    else:
+        return n * calculate_factorial(n - 1)
+
+
+# number_input = 7
+
+number_input = input('Εισάξατε αριθμό για να υπολογίσετε το παραγοντικό του: ')
+number_input = int(number_input)
+
+# check if the number is negative
+if number_input < 0:
+    print("Το παραγοντικό δεν υφίσταται για αρνητικούς αριθμούς")
+elif number_input == 0:
+    print('το παραγοντικό του 0 είναι 1 και η συνάρτηση καλέστηκε ' + 1 + 'φορά')
+else:
+    print(
+        'το παραγοντικό του ' + str(number_input) + ' είναι ' + str(
+            calculate_factorial(number_input)) + ' και η συνάρτηση καλέστηκε ' + str(recur_count) + ' φορές')
+
+
+
+======== take 1 ========
+
+import sys
+from urllib import request
+from urllib import error
+
+recur_count = 0
+
+
+def recursive_factorial_function(current_number):
+    global recur_count
+    recur_count += 1
+    if current_number == 1:
+        return n
+    else:
+        return n * calculate_factorial(n - 1)
+
+
+# number_input = 7
+
+number_input = input('Εισάξατε αριθμό για να υπολογίσετε το παραγοντικό του: ')
+number_input = int(number_input)
+
+# check if the number is negative
+if number_input < 0:
+    print("Το παραγοντικό δεν υφίσταται για αρνητικούς αριθμούς")
+elif number_input == 0:
+    print('το παραγοντικό του 0 είναι 1 και η συνάρτηση καλέστηκε ' + 1 + 'φορά')
+else:
+    print(
+        'το παραγοντικό του ' + str(number_input) + ' είναι ' + str(
+            calculate_factorial(number_input)) + ' και η συνάρτηση καλέστηκε ' + str(recur_count) + ' φορές')

@@ -1,4 +1,3 @@
-from csv import reader
 import json
 import sys
 from urllib import request
@@ -13,19 +12,11 @@ def get_pollution():
 
         ).decode(
             'UTF-8')
-        # print('result_bytes', result_bytes)
         dictionary = json.loads(result_bytes)
-        # print('dictionary', dictionary)
-        # print('data', dictionary['data'])
-        # print('data target', dictionary['data']['iaqi'])
 
         cityData = dictionary['data']['city']
-        # print('cityData', cityData)
-        # print('cityData', cityData['name'])
         greek_city_info = cityData['name'].split(',')[1]
         city_info = greek_city_info.split('  ')[0]
-        # print('greek_city_info', greek_city_info)
-        # print('city_info', city_info)
         pollution = dictionary['data']['iaqi']
 
         valuesArray = []
@@ -34,17 +25,8 @@ def get_pollution():
         table_rows = []
 
         for key in pollution:
-            # table_columns.append(key)
             table_rows.append([key, pollution[key]['v']])
             valuesArray.append({key: pollution[key]['v']})
-        # for index in range(1, len(valuesArray)):
-        #     table_rows.append([index, valuesArray[index]])
-
-        # print('array values', valuesArray)
-        # print('table_columns', table_columns)
-        # print('table_rows', table_rows)
-        # TODO: convert above to data frame (series of tuples/key-value pairs array?
-
         return [city_info, pd.DataFrame(data=table_rows, columns=table_columns)]
 
     except error.HTTPError as e:
@@ -58,4 +40,3 @@ def get_pollution():
 
 
 dfResult = get_pollution()
-# print(dfResult)
